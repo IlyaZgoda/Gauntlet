@@ -47,13 +47,10 @@ namespace Code.Logic.Hero
         {
             State = StateFor(stateHash);
 
-            Debug.Log($"state {State} entered");
         }
 
         public void OnExit(int stateHash)
         {
-            var state = StateFor(stateHash);
-            Debug.Log($"state {state} exited");
         }
 
         private AnimatorState StateFor(int stateHash)

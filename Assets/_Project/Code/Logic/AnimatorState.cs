@@ -12,6 +12,7 @@ namespace Code.Logic
         Idle,
         Attack,
         Run,
-        Died
+        Died,
+        TakeDamage
     }
 }
