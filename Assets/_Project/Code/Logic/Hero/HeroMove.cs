@@ -6,7 +6,7 @@ namespace Code.Logic.Hero
     public class HeroMove : MonoBehaviour
     {
         [SerializeField] private float _moveSpeed = 1f;
-        [SerializeField] private HeroAnimator _heroAnimator;
+        [SerializeField] private HeroAnimator _animator;
         private Rigidbody2D _rigidBody;
         private InputActions _inputActions;
         private Vector2 _moveInput;
@@ -21,7 +21,7 @@ namespace Code.Logic.Hero
 
         private void FixedUpdate()
         {
-            if (_heroAnimator.IsAttacking)
+            if (_animator.IsAttacking)
             {
                 _rigidBody.linearVelocity = Vector2.zero;
                 return;
@@ -34,11 +34,11 @@ namespace Code.Logic.Hero
 
             _rigidBody.linearVelocity = _smoothedMoveInput * _moveSpeed;
 
-            _heroAnimator.PlayRun(_moveInput);
+            _animator.PlayRun(_moveInput);
 
             if (_moveInput != Vector2.zero)
             {
-                _heroAnimator.PlayIdle(_moveInput);
+                _animator.PlayIdle(_moveInput);
             }
         }   
         

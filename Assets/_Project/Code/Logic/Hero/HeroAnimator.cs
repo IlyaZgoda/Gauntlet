@@ -21,7 +21,8 @@ namespace Code.Logic.Hero
         {
             { AnimatorState.Idle, Animator.StringToHash("Idle") },
             { AnimatorState.Attack, Animator.StringToHash("Attack") },
-            { AnimatorState.Run, Animator.StringToHash("Run") }
+            { AnimatorState.Run, Animator.StringToHash("Run") },
+            { AnimatorState.TakeDamage, Animator.StringToHash("TakeDamage") }
         };
 
         public AnimatorState State { get; private set; }
@@ -42,6 +43,9 @@ namespace Code.Logic.Hero
 
         public void PlayAttack() =>
             _animator.SetTrigger(StateHashes[AnimatorState.Attack]);
+
+        public void PlayTakingDamage() =>
+            _animator.SetTrigger(StateHashes[AnimatorState.TakeDamage]);
 
         public void OnEnter(int stateHash)
         {

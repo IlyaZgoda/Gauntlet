@@ -8,10 +8,9 @@ namespace Code.Logic.Hero
     {
         [SerializeField] private float _damage;
         [SerializeField] private float _damageRadius;
-        [SerializeField] private HeroAnimator _heroAnimator;
+        [SerializeField] private HeroAnimator _animator;
         private InputActions _inputActions;
         private static int _layerMask;
-        private Collider2D[] _hittables = new Collider2D[3];
 
         private void Awake()
         {
@@ -33,10 +32,10 @@ namespace Code.Logic.Hero
 
         private void OnAttack(InputAction.CallbackContext context)
         {
-            if (!_heroAnimator.IsAttacking)
+            if (!_animator.IsAttacking)
             {
                 Hit();
-                _heroAnimator.PlayAttack();
+                _animator.PlayAttack();
             }
                 
         }

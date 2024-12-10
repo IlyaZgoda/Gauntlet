@@ -45,7 +45,7 @@ namespace Code.Logic.Enemy
         public void PlayAttack() =>
             _animator.SetTrigger(StateHashes[AnimatorState.Attack]);
 
-        public void PlayTakeDamage() =>
+        public void PlayTakingDamage() =>
             _animator.SetTrigger(StateHashes[AnimatorState.TakeDamage]);
 
         public void PlayDeath() =>

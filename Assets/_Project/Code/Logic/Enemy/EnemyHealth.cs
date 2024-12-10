@@ -33,7 +33,7 @@ namespace Code.Logic.Enemy
         {
             Current -= damage;
 
-            _animator.PlayTakeDamage();
+            _animator.PlayTakingDamage();
 
             HealthChanged?.Invoke();
         }
