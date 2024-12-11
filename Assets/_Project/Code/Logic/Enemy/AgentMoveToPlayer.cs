@@ -13,7 +13,7 @@ namespace Code.Logic.Enemy
 
         private void Update()
         {
-            if (_heroTransform && !IsHeroReached())
+            if (_heroTransform && !IsHeroReached() && enabled)
             {
                 var direction = GetLookDirection();
                 _agent.SetDestination(_heroTransform.position);

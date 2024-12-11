@@ -1,10 +1,13 @@
-﻿using Code.Logic.Enemy;
+﻿using Code.Logic;
+using Code.Logic.Enemy;
 using Code.Logic.Hero;
 using Code.Services.StaticData;
 using Code.StaticData;
 using Code.StaticData.SceneManagement;
+using Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using Zenject;
@@ -48,21 +51,43 @@ namespace Code.Infrastructure.Factories
             return instance;
         }
 
-        public List<GameObject> CreateEnemyWave(int count, LevelStaticData levelStaticData)
+        public EnemyWave CreateEnemyWave(int totalEnemies, LevelStaticData levelStaticData)
         {
             List<GameObject> enemies = new();
 
-            for (int i = 0; i < levelStaticData.EnemySpawners.Count; i++)
-            {
-                for (int j = 0; j < count; j++)
-                {
-                    var enemy = CreateEnemy(ResourcesAssetPath.Enemy, levelStaticData.EnemySpawners[j].Position);
+            var random = new System.Random();
+            var spawners = levelStaticData.EnemySpawners;
+            var randomSpawners = spawners.OrderBy(x => random.Next()).Take(3).ToList();
 
+            int enemiesPerSpawner = totalEnemies / randomSpawners.Count;
+            int remainingEnemies = totalEnemies % randomSpawners.Count;
+
+            foreach (var spawner in randomSpawners)
+            {
+                int enemiesToSpawn = enemiesPerSpawner;
+
+                if (remainingEnemies > 0)
+                {
+                    enemiesToSpawn++;
+                    remainingEnemies--;
+                }
+
+                for (int j = 0; j < enemiesToSpawn; j++)
+                {
+                    var enemy = CreateEnemy(ResourcesAssetPath.Enemy, spawner.Position);
                     enemies.Add(enemy);
-                }  
+                }
             }
 
-            return enemies;
+            return new EnemyWave(enemies);
+        }
+
+        public async UniTask<ActorUI> CreateHUD()
+        {
+            var hud = _instantiator.InstantiatePrefabResourceForComponent<ActorUI>("HUD/hud");
+            await UniTask.Yield();
+
+            return hud;
         }
 
     }

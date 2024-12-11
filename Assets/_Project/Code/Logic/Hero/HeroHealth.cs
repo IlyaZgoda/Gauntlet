@@ -22,7 +22,6 @@ namespace Code.Logic.Hero
         public void Construct(CoreEventBus eventBus)
         {
             _eventBus = eventBus;
-            Debug.Log($"Injected {_eventBus}");
         }
 
         public float Current
@@ -35,6 +34,7 @@ namespace Code.Logic.Hero
                     _currentHP = value;
 
                     HealthChanged?.Invoke();
+                    _eventBus.PlayerHealthChanged?.Invoke(_currentHP);
                 }
             }
         }

@@ -49,9 +49,9 @@ namespace Code.Infrastructure.States
             var hero = _gameFactory.CreateHero(ResourcesAssetPath.Hero, levelStaticData);
 
             Camera.main.GetComponent<CameraFollow>().Follow(hero);
-            _gameFactory.CreateEnemyWave(2, levelStaticData);
+            await _gameFactory.CreateHUD();
 
-            await _gameStateMachine.Enter<GameLoopState>();
+            await _gameStateMachine.Enter<GameLoopState, LevelStaticData>(levelStaticData);
         }       
             
         public UniTask Exit() =>
