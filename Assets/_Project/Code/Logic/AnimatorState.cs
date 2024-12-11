@@ -11,6 +11,8 @@ namespace Code.Logic
         Unknown,
         Idle,
         Attack,
+        SecondAttack,
+        SpecialAttack,
         Run,
         Died,
         TakeDamage

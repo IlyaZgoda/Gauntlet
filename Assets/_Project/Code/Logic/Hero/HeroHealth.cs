@@ -41,6 +41,7 @@ namespace Code.Logic.Hero
                 return;
 
             Current -= damage;
+
             _animator.PlayTakingDamage();
         }
     }

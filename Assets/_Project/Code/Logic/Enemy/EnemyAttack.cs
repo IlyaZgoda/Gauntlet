@@ -10,7 +10,7 @@ namespace Code.Logic.Enemy
     public class EnemyAttack : MonoBehaviour
     {
         [SerializeField] private EnemyAnimator _animator;
-        [SerializeField] private float _attackCooldown = 3.0f;
+        [SerializeField] private float _attackCooldown = 1f;
         [SerializeField] private float _cleavage = 0.5f;
         [SerializeField] private float _effectiveDistance = 0.5f;
         [SerializeField] private float _damage = 10;
@@ -30,15 +30,17 @@ namespace Code.Logic.Enemy
             if (CanAttack())
             {
                 StartAttack();
-                Debug.Log("Can attack");
-            }
-                
+            }       
         }
 
         private void OnAttack()
         {
-            if (Hit(out Collider2D hit))
-                hit.transform.GetComponent<IHealth>().TakeDamage(_damage);  
+            if (Hit(out Collider2D[] hit))
+            {
+                IHealth target = null;
+                hit.FirstOrDefault(x => x.transform.parent.TryGetComponent<IHealth>(out target));
+                target?.TakeDamage(_damage);
+            }          
         }
 
         private void OnAttackEnded()
@@ -62,18 +64,18 @@ namespace Code.Logic.Enemy
                 _cooldown -= Time.deltaTime;
         }
 
-        private bool Hit(out Collider2D target)
+        private bool Hit(out Collider2D[] target)
         {
-            target = Physics2D.OverlapCircle(StartPoint(), _cleavage, _layerMask);
+            target = Physics2D.OverlapCircleAll(StartPoint(), _cleavage, _layerMask);
 
             return target != null;
         }
 
         private Vector2 StartPoint() =>
-            new Vector2(transform.position.x, transform.position.y + 0.5f) * _effectiveDistance;
+            new Vector2(transform.position.x, transform.position.y) * _effectiveDistance;
 
         private bool CanAttack() =>
-          _attackIsActive && !_isAttacking && CooldownIsUp();
+            _attackIsActive && !_isAttacking && CooldownIsUp();   
 
         private void StartAttack()
         {

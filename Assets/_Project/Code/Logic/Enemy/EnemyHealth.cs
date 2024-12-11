@@ -10,6 +10,7 @@ namespace Code.Logic.Enemy
     public class EnemyHealth : MonoBehaviour, IHealth
     {
         [SerializeField] private EnemyAnimator _animator;
+        [SerializeField] private BloodAnimator _bloodAnimator;
 
         [SerializeField] private float _current;
 
@@ -34,8 +35,11 @@ namespace Code.Logic.Enemy
             Current -= damage;
 
             _animator.PlayTakingDamage();
+            _bloodAnimator.StopBlood();
+            _bloodAnimator.PlayBlood();
 
             HealthChanged?.Invoke();
+            //Debug.Log(damage);
         }
     }
 }

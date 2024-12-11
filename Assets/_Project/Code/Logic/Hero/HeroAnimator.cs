@@ -21,12 +21,19 @@ namespace Code.Logic.Hero
         {
             { AnimatorState.Idle, Animator.StringToHash("Idle") },
             { AnimatorState.Attack, Animator.StringToHash("Attack") },
+            { AnimatorState.SecondAttack, Animator.StringToHash("SecondAttack") },
+            { AnimatorState.SpecialAttack, Animator.StringToHash("SpecialAttack") },
             { AnimatorState.Run, Animator.StringToHash("Run") },
-            { AnimatorState.TakeDamage, Animator.StringToHash("TakeDamage") }
+            { AnimatorState.TakeDamage, Animator.StringToHash("TakeDamage") },
+            { AnimatorState.Died, Animator.StringToHash("Died") }
         };
+
+        public event Action<AnimatorState> StateEntered;
+        public event Action<AnimatorState> StateExited;
 
         public AnimatorState State { get; private set; }
         public bool IsAttacking => State == AnimatorState.Attack;
+        public bool IsSpecialAttacking => State == AnimatorState.SpecialAttack; 
 
         public void PlayRun(Vector2 moveInput)
         {
@@ -44,17 +51,27 @@ namespace Code.Logic.Hero
         public void PlayAttack() =>
             _animator.SetTrigger(StateHashes[AnimatorState.Attack]);
 
+        public void PlaySecondAttack() =>
+            _animator.SetTrigger(StateHashes[AnimatorState.SecondAttack]);
+
+        public void PlaySpecialAttack() =>
+            _animator.SetTrigger(StateHashes[AnimatorState.SpecialAttack]);
+
         public void PlayTakingDamage() =>
             _animator.SetTrigger(StateHashes[AnimatorState.TakeDamage]);
+
+        public void PlayDeath() =>
+            _animator.SetTrigger(StateHashes[AnimatorState.Died]);
 
         public void OnEnter(int stateHash)
         {
             State = StateFor(stateHash);
-
+            //Debug.Log($"State {State} entered");
         }
 
         public void OnExit(int stateHash)
         {
+            //Debug.Log($"State {State} exited");
         }
 
         private AnimatorState StateFor(int stateHash)
@@ -67,5 +84,9 @@ namespace Code.Logic.Hero
 
             return AnimatorState.Unknown;
         }
+
+        private void OnDeathEnd() =>
+            _animator.speed = 0;
+
     }
 }

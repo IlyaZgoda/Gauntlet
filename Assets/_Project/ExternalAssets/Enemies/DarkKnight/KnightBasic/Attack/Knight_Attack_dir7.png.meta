@@ -93,7 +93,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -484,7 +484,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Knight_Attack_dir7_0: -7464490673951979020
+      Knight_Attack_dir7_1: -146545671177719530
+      Knight_Attack_dir7_10: 1920400809651965291
+      Knight_Attack_dir7_11: 7018410256261911965
+      Knight_Attack_dir7_12: 8483866400284485548
+      Knight_Attack_dir7_13: -2408311022572382241
+      Knight_Attack_dir7_14: -4607493283545081164
+      Knight_Attack_dir7_2: 5359608435060646344
+      Knight_Attack_dir7_3: 4783717754310152777
+      Knight_Attack_dir7_4: 1699640680821659068
+      Knight_Attack_dir7_5: 3376828816457920371
+      Knight_Attack_dir7_6: -5382144106128610779
+      Knight_Attack_dir7_7: -5578285535662586113
+      Knight_Attack_dir7_8: 1945381987853416045
+      Knight_Attack_dir7_9: -5485922072217654586
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

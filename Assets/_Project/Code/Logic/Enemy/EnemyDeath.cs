@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Code.Logic.Enemy
 {
@@ -13,6 +14,7 @@ namespace Code.Logic.Enemy
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private AgentMoveToPlayer _agentMoveToPlayer;
+        [SerializeField] private NavMeshAgent _agent;
 
         public event Action Happened;
 
@@ -32,6 +34,7 @@ namespace Code.Logic.Enemy
         {
             _health.HealthChanged -= OnHealthChanged;
 
+            _agent.isStopped = false;
             _agentMoveToPlayer.enabled = false;
 
             _animator.PlayDeath();

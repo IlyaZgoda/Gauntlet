@@ -25,6 +25,9 @@ namespace Code.Logic.Enemy
             { AnimatorState.Died, Animator.StringToHash("Died") }
         };
 
+        public Action<AnimatorState> StateEntered;
+        public Action<AnimatorState> StateExited;
+
         public AnimatorState State { get; private set; }
         public bool IsAttacking => State == AnimatorState.Attack;
 
@@ -55,13 +58,15 @@ namespace Code.Logic.Enemy
         {
             State = StateFor(stateHash);
 
-            Debug.Log($"state {State} entered");
+            StateEntered?.Invoke(State);
+            //Debug.Log($"State {State} entered");
         }
 
         public void OnExit(int stateHash)
         {
             var state = StateFor(stateHash);
-            Debug.Log($"state {state} exited");
+            StateExited?.Invoke(state);
+            //Debug.Log($"State {State} exited");
         }
 
         private AnimatorState StateFor(int stateHash)

@@ -11,7 +11,7 @@ namespace Code.Logic.Enemy
         private void OnTriggerEnter2D(Collider2D other)
         {
             TriggerEnter?.Invoke(other);
-            Debug.Log(other.gameObject);
+            //Debug.Log(other.gameObject);
         }
 
         private void OnTriggerExit2D(Collider2D other) =>
