@@ -10,5 +10,7 @@ namespace Code.StaticData
     {
         public const string Bootstrapper = "Infrastructure/Bootstrapper";
         public const string CoroutineRunner = "Infrastructure/CoroutineRunner";
+        public const string Hero = "Hero/Hero";
+        public const string Enemy = "Enemies/DarkKnight/DarkKnight";
     }
 }

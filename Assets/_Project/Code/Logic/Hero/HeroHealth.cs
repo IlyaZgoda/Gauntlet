@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Code.Services.Observable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Logic.Hero
 {
@@ -12,8 +14,16 @@ namespace Code.Logic.Hero
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private float _currentHP;
         [SerializeField] private float _maxHP;
+        private CoreEventBus _eventBus;
 
         public event Action HealthChanged;
+
+        [Inject]
+        public void Construct(CoreEventBus eventBus)
+        {
+            _eventBus = eventBus;
+            Debug.Log($"Injected {_eventBus}");
+        }
 
         public float Current
         {

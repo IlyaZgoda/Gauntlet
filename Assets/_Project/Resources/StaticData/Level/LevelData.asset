@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7771d20faac3264fa0d1a7c049201a4, type: 3}
+  m_Name: LevelData
+  m_EditorClassIdentifier: 
+  HeroSpawner:
+    Position: {x: -5.69, y: -1.85, z: 0}
+  EnemySpawners:
+  - Position: {x: -8.783974, y: 4.254995, z: -0.0445451}
+  - Position: {x: 5.616026, y: -1.755005, z: -0.0445451}
+  - Position: {x: -11.743974, y: 0.06499493, z: -0.0445451}
+  - Position: {x: 3.626026, y: 4.424995, z: -0.0445451}
+  - Position: {x: 6.086026, y: -3.655005, z: -0.0445451}

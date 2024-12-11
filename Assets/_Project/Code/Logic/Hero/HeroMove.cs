@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using Code.Services.Observable;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Code.Logic.Hero
 {
@@ -12,7 +15,14 @@ namespace Code.Logic.Hero
         private Vector2 _moveInput;
         private Vector2 _smoothedMoveInput;
         private Vector2 _smoothedMoveVelocity;
+        private CoreEventBus _eventBus;
 
+        [Inject]
+        public void Construct(CoreEventBus eventBus)
+        {
+            _eventBus = eventBus;
+            Debug.Log($"Injected {_eventBus}");
+        }
         private void Awake()
         {
             _rigidBody = GetComponent<Rigidbody2D>();

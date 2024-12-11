@@ -13,7 +13,9 @@ namespace Code.Logic.Hero
         [SerializeField] private float _beginAttackWindow = 0f;
         [SerializeField] private float _endAttackWindow = 1f;
         [SerializeField] private float _attackCooldown = 0.01f;
+        [SerializeField] private float _specialAttackCooldown = 1.5f;
         private float _cooldown;
+        private float _specialCooldown;
         private bool _canPerformSecondAttack = false;
         [SerializeField] private HeroAnimator _animator;
         private InputActions _inputActions;
@@ -41,13 +43,15 @@ namespace Code.Logic.Hero
 
         private void Update()
         {
-            UpdateCooldown();
+            UpdateCooldown(ref _cooldown);
+            UpdateCooldown(ref _specialCooldown);
         }
 
         private void OnAttack(InputAction.CallbackContext context)
         {
-            if (CooldownIsUp())
+            if (CooldownIsUp(_cooldown))
             {
+                Debug.Log(_cooldown.ToString());    
                 Hit(1);
                 StartCoroutine(CheckForSecondAttack()); 
                 _animator.PlayAttack();
@@ -64,10 +68,11 @@ namespace Code.Logic.Hero
 
         private void OnSpecialAttack(InputAction.CallbackContext context)
         {
-            if (!_animator.IsSpecialAttacking)
+            if (CooldownIsUp(_specialCooldown))
             {
                 Hit(2);
                 _animator.PlaySpecialAttack();
+                _specialCooldown = _specialAttackCooldown;
             }
         }
 
@@ -97,13 +102,13 @@ namespace Code.Logic.Hero
             _canPerformSecondAttack = true;
         }
 
-        private bool CooldownIsUp() =>
-         _cooldown <= 0f;
+        private bool CooldownIsUp(float cooldown) =>
+            cooldown <= 0f;
 
-        private void UpdateCooldown()
+        private void UpdateCooldown(ref float cooldown)
         {
-            if (!CooldownIsUp())
-                _cooldown -= Time.deltaTime;
+            if (!CooldownIsUp(cooldown))
+                cooldown -= Time.deltaTime;
         }
     }
 }

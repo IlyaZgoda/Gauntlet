@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Code.Logic.Enemy
 {
     public class AgentMoveToPlayer : MonoBehaviour
     {
         [SerializeField] private NavMeshAgent _agent;
-        [SerializeField] private Transform _heroTransform;
         [SerializeField] private EnemyAnimator _animator;
+        private Transform _heroTransform;
         private Vector2 _lastDirection;
 
         private void Update()
@@ -26,6 +27,9 @@ namespace Code.Logic.Enemy
                 _animator?.PlayIdle(_lastDirection);
             }
         }
+
+        public void Construct(Transform hero) =>
+            _heroTransform = hero;
 
         private bool IsHeroReached() =>
             Vector2.Distance(_agent.transform.position, _heroTransform.position) <= _agent.stoppingDistance;

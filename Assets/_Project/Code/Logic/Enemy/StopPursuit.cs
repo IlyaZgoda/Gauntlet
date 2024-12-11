@@ -5,25 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Logic.Enemy
 {
     public class StopPursuit : MonoBehaviour
     {
 
-        [SerializeField] private HeroDeath _heroDeath;
+        private HeroDeath _heroDeath;
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private AgentMoveToPlayer _agentMoveToPlayer;
 
         private void Start()
         {
-            _heroDeath.Happened += SwitchPursuitOff;
+            if ( _heroDeath != null ) 
+                _heroDeath.Happened += SwitchPursuitOff;
         }
 
         private void OnDestroy()
         {
-            _heroDeath.Happened -= SwitchPursuitOff;
+            if (_heroDeath != null)
+                _heroDeath.Happened -= SwitchPursuitOff;
         }
+
+        public void Construct(HeroDeath heroDeath) =>
+            _heroDeath = heroDeath;
 
         private void SwitchPursuitOff()
         {
