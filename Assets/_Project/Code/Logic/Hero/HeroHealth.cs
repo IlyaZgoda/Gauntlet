@@ -1,4 +1,5 @@
-﻿using Code.Services.Observable;
+﻿using Code.Logic.Enemy;
+using Code.Services.Observable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Code.Logic.Hero
         [SerializeField] private HeroAnimator _animator;
         [SerializeField] private float _currentHP;
         [SerializeField] private float _maxHP;
+        [SerializeField] private TriggerObserver _triggerObserver;
         private CoreEventBus _eventBus;
 
         public event Action HealthChanged;
@@ -45,6 +47,24 @@ namespace Code.Logic.Hero
             set => _maxHP = value;
         }
 
+        private void Start()
+        {
+            _triggerObserver.TriggerEnter += Heal;
+            
+        }
+
+        private void Heal(Collider2D other)
+        {
+            
+            IHealthPack healthPack;
+            if (other.TryGetComponent<IHealthPack>(out healthPack))
+            {
+                Debug.Log("heal");
+                Current = (healthPack.HealingAmount + Current > Max) ? Max : Current + healthPack.HealingAmount;
+                Destroy(other.gameObject);
+            }
+        }
+
         public void TakeDamage(float damage)
         {
             if (Current <= 0)
@@ -53,6 +73,11 @@ namespace Code.Logic.Hero
             Current -= damage;
 
             _animator.PlayTakingDamage();
+        }
+
+        private void OnDestroy()
+        {
+            _triggerObserver.TriggerEnter -= Heal;
         }
     }
 }

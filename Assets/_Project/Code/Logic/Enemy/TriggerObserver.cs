@@ -10,6 +10,7 @@ namespace Code.Logic.Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            Debug.Log(other.name);
             TriggerEnter?.Invoke(other);
             //Debug.Log(other.gameObject);
         }

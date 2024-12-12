@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Code.Services.Observable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Logic.Hero
 {
@@ -15,8 +17,13 @@ namespace Code.Logic.Hero
         [SerializeField] private HeroAnimator _animator;
 
         private bool _isDead;
+        private CoreEventBus _eventBus;
 
         public event Action Happened;
+
+        [Inject]
+        public void Construct(CoreEventBus eventBus) =>
+            _eventBus = eventBus;
 
         private void Start() =>
             _health.HealthChanged += HealthChanged;
@@ -36,8 +43,9 @@ namespace Code.Logic.Hero
             _move.enabled = false;
             _attack.enabled = false;
             _animator.PlayDeath();
-
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             Happened?.Invoke();
+            _eventBus.PlayerDied?.Invoke();
         }
     }
 }

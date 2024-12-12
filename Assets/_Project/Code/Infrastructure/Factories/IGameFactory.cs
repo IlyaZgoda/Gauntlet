@@ -14,5 +14,6 @@ namespace Code.Infrastructure.Factories
         GameObject CreateEnemy(string path, Vector3 position);
         EnemyWave CreateEnemyWave(int count, LevelStaticData levelStaticData);
         UniTask<ActorUI> CreateHUD();
+        HealthPack CreateHealthPack(string path, Vector3 position);
     }
 }

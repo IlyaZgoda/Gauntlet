@@ -23,8 +23,8 @@ namespace Code.Infrastructure.States
         {
             _levelStaticData = levelStaticData;
 
-            EnemyWaveHandler handler = new(_gameFactory, _levelStaticData);
-            await handler.HandleAsync(5, 3);
+            EnemyWaveHandler handler = new(_gameFactory, _levelStaticData, _eventBus);
+            await handler.HandleAsync(10, 3);
 
             await UniTask.Yield();
         }

@@ -6,5 +6,7 @@ namespace Code.Services.Observable
     {
         public Action<float> PlayerHealthChanged;
         public Action EnemyDied;
+        public Action<int> WaveSpawned;
+        public Action PlayerDied;
     }
 }

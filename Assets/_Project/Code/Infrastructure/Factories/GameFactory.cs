@@ -7,6 +7,7 @@ using Code.StaticData.SceneManagement;
 using Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEngine;
@@ -57,7 +58,7 @@ namespace Code.Infrastructure.Factories
 
             var random = new System.Random();
             var spawners = levelStaticData.EnemySpawners;
-            var randomSpawners = spawners.OrderBy(x => random.Next()).Take(3).ToList();
+            var randomSpawners = spawners.OrderBy(x => random.Next()).Take(5).ToList();
 
             int enemiesPerSpawner = totalEnemies / randomSpawners.Count;
             int remainingEnemies = totalEnemies % randomSpawners.Count;
@@ -88,6 +89,15 @@ namespace Code.Infrastructure.Factories
             await UniTask.Yield();
 
             return hud;
+        }
+
+        public HealthPack CreateHealthPack(string path, Vector3 position)
+        {
+            var prefab = Resources.Load<GameObject>(path);
+            var instance = GameObject.Instantiate(prefab, position, prefab.transform.rotation);
+            var healthPack = instance.GetComponent<HealthPack>();
+
+            return healthPack;
         }
 
     }

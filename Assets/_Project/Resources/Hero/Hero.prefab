@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 5165167773845252493}
   - component: {fileID: 8404261434283513193}
   - component: {fileID: 1766836003793278567}
+  - component: {fileID: 2561362063232377991}
   m_Layer: 7
   m_Name: Hero
   m_TagString: Player
@@ -345,6 +346,7 @@ MonoBehaviour:
   _animator: {fileID: 1912908956164105759}
   _currentHP: 100
   _maxHP: 100
+  _triggerObserver: {fileID: 2561362063232377991}
 --- !u!66 &8404261434283513193
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -406,3 +408,15 @@ MonoBehaviour:
   _move: {fileID: 2078944917288156812}
   _attack: {fileID: 4741448502729285621}
   _animator: {fileID: 1912908956164105759}
+--- !u!114 &2561362063232377991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953178231246204881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f481671c0083d43ad0e138add5aea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

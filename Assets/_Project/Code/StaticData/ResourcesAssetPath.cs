@@ -12,5 +12,6 @@ namespace Code.StaticData
         public const string CoroutineRunner = "Infrastructure/CoroutineRunner";
         public const string Hero = "Hero/Hero";
         public const string Enemy = "Enemies/DarkKnight/DarkKnight";
+        public const string HealthPack = "HealthPack";
     }
 }
