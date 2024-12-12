@@ -25,8 +25,6 @@ namespace Code.Infrastructure.States
 
             EnemyWaveHandler handler = new(_gameFactory, _levelStaticData, _eventBus);
             await handler.HandleAsync(10, 3);
-
-            await UniTask.Yield();
         }
         
         

@@ -50,8 +50,7 @@ namespace Code.Logic.Hero
         private void OnAttack(InputAction.CallbackContext context)
         {
             if (CooldownIsUp(_cooldown))
-            {
-                Debug.Log(_cooldown.ToString());    
+            {  
                 Hit(1);
                 StartCoroutine(CheckForSecondAttack()); 
                 _animator.PlayAttack();
@@ -99,7 +98,7 @@ namespace Code.Logic.Hero
             yield return new WaitForSeconds(_beginAttackWindow);
             _canPerformSecondAttack = true;
             yield return new WaitForSeconds(_endAttackWindow - _beginAttackWindow);
-            _canPerformSecondAttack = true;
+            _canPerformSecondAttack = false;
         }
 
         private bool CooldownIsUp(float cooldown) =>
